@@ -5,7 +5,7 @@
   "scripts": {
     "start": "cross-env CLIENT_ENV=development craco start",
     "build": "cross-env CLIENT_ENV=production craco build",
-    "test": "cross-env CLIENT_ENV=development craco test",
+    "test": "cross-env CLIENT_ENV=development craco test --watchAll=false",
     "eject": "cross-env CLIENT_ENV=development craco eject"
   },
   "dependencies": {
