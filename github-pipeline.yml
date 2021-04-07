@@ -1,0 +1,48 @@
+name: CI/CD
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+
+      - name: yarn install
+        run: yarn install
+
+      - name: yarn test
+        run: yarn test
+
+      - uses: cschleiden/replace-tokens@v1
+        with:
+          files: '["public/config.js"]'
+          tokenPrefix: '__{'
+          tokenSuffix: '}__'
+        env:
+          myNameIs: ${{ secrets.MY_NAME }}
+
+      - name: clean aws s3 bucket
+        run: aws s3 rm s3://${{ secrets.AWS_S3_NAME }} --recursive
+
+      - name: yarn build
+        run: yarn build
+
+      - name: deploy
+        run: aws s3 sync build/ s3://${{ secrets.AWS_S3_NAME }} --acl public-read
+
+      # Archive if needed
+      #- name: Archive production artifacts
+      #  uses: actions/upload-artifact@v2
+      #  with:
+      #    name: build-directory
+      #    path: build
