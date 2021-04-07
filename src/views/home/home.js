@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import * as ClickSelectors from '@selectors/click/click-selector'
 import * as ClickActions from '@redux/click/click-action'
 
+import environment from '@environment'
+
 const App = () => {
   const dispatch = useDispatch()
   const clickCount = useSelector(ClickSelectors.clickQuantity)
@@ -17,10 +19,12 @@ const App = () => {
 
   return (
     <div className="App">
-      <p id="click-display">Quantidade de clicks: {clickCount}</p>
-      <button onClick={incrementClickQuantity}>Click aqui para incrementar</button>
+      <p id="click-display">
+        {environment.myNameIs} you clicked {clickCount} times
+      </p>
+      <button onClick={incrementClickQuantity}>Click to increment</button>
       <br />
-      <button onClick={goToPage2}>Ir para página 2</button>
+      <button onClick={goToPage2}>Go to page 2</button>
     </div>
   )
 }
