@@ -9,9 +9,9 @@ const Page2 = ({ history }) => {
 
   return (
     <>
-      <button onClick={clearQuantity}>Limpar quantidade</button>
+      <button onClick={clearQuantity}>Clean all clicks</button>
       <br />
-      <button onClick={history.goBack}>Voltar para página anterior</button>
+      <button onClick={history.goBack}>Go back</button>
     </>
   )
 }

@@ -1,6 +1,8 @@
 import { render, screen } from '@testing-library/react'
 import Home from '@views/home/home'
-import TemplateComponentTest from 'tests/template-component'
+import TemplateComponentTest from 'test-setup/template-component'
+
+import environment from '@environment/'
 
 test('renders Home withou crashing', () => {
   render(
@@ -31,6 +33,6 @@ test('click-display paragraph should render properly the redux data', () => {
     </TemplateComponentTest>
   )
 
-  const clickDisplayElement = screen.getByText(`Quantidade de clicks: ${state.click.quantity}`)
+  const clickDisplayElement = screen.getByText(`${environment.myNameIs} you clicked ${state.click.quantity} times`)
   expect(clickDisplayElement).toBeInTheDocument()
 })

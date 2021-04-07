@@ -24,8 +24,7 @@ module.exports = function ({ env, paths }) {
     },
     jest: {
       configure: {
-        setupFilesAfterEnv: ['<rootDir>/src/tests/setup-tests.js'],
-        modulePathIgnorePatterns: ['<rootDir>/src/environments', '<rootDir>/src/views'],
+        setupFilesAfterEnv: ['<rootDir>/src/test-setup/setup-tests.js'],
         moduleNameMapper: {
           '^@environment(.*)$': '<rootDir>/src/environments/development',
           '^@constants(.*)$': '<rootDir>/src/constants$1',

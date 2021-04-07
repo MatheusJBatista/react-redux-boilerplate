@@ -3,8 +3,6 @@ export default function baseEnv() {
     route: {
       baseRoute: '/',
     },
-    isProduction: true,
-    isDevelopment: false,
-    isTesting: false,
+    myNameIs: 'Matheus',
   }
 }
