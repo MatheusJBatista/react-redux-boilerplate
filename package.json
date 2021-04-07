@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "cross-env CLIENT_ENV=development craco start",
+    "start": "cross-env CLIENT_ENV=production craco start",
     "build": "cross-env CLIENT_ENV=production craco build",
     "test": "cross-env CLIENT_ENV=development craco test --watchAll",
     "eject": "cross-env CLIENT_ENV=development craco eject"
