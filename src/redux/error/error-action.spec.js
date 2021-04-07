@@ -1,6 +1,6 @@
-import ErrorAction from './error-action'
+import * as ErrorAction from './error-action'
 import uuid from 'uuid/v4'
-import ActionUtility from '@utilities/action-utility'
+import * as ActionUtility from '@utilities/action-utility'
 
 describe('ErrorAction', () => {
   describe('removeById', () => {

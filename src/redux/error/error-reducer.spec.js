@@ -1,7 +1,7 @@
-import ErrorReducer from './error-reducer'
-import ErrorAction from './error-action'
-import HttpErrorResponseModel from '../../models/HttpErrorResponseModel'
-import ActionUtility from '@utilities/action-utility'
+import ErrorReducer, { initialState as errorReducerInitialState } from './error-reducer'
+import * as ErrorAction from './error-action'
+import HttpErrorResponseModel from '../../models/http-error-response-model'
+import * as ActionUtility from '@utilities/action-utility'
 
 describe('ErrorReducer', () => {
   const requestActionType = 'SomeAction.REQUEST_SOMETHING'
@@ -11,14 +11,14 @@ describe('ErrorReducer', () => {
   it('returns default state with invalid action type', () => {
     const action = ActionUtility.createAction('')
 
-    expect(ErrorReducer.reducer(undefined, action)).toEqual(ErrorReducer.initialState)
+    expect(ErrorReducer(undefined, action)).toEqual(errorReducerInitialState)
   })
 
   describe('handle REQUEST_*_FINISHED action types', () => {
     it('should add error to state with *_FINISHED action type as the key', () => {
       const action = ActionUtility.createAction(requestActionTypeFinished, httpErrorResponseModel, true)
 
-      const actualResult = ErrorReducer.reducer(ErrorReducer.initialState, action)
+      const actualResult = ErrorReducer(errorReducerInitialState, action)
       const expectedResult = {
         [requestActionTypeFinished]: httpErrorResponseModel,
       }
@@ -34,7 +34,7 @@ describe('ErrorReducer', () => {
       }
       const action = ActionUtility.createAction(requestActionType, httpErrorResponseModel, true)
 
-      const actualResult = ErrorReducer.reducer(initialState, action)
+      const actualResult = ErrorReducer(initialState, action)
       const expectedResult = {
         idOfKeyThatShouldNotBeRemoved: errorThatRemainsOnState,
       }
@@ -45,7 +45,7 @@ describe('ErrorReducer', () => {
     it('should not add error to state without *_FINISHED action type', () => {
       const action = ActionUtility.createAction(requestActionType, httpErrorResponseModel, true)
 
-      const actualResult = ErrorReducer.reducer(ErrorReducer.initialState, action)
+      const actualResult = ErrorReducer(errorReducerInitialState, action)
       const expectedResult = {}
 
       expect(actualResult).toEqual(expectedResult)
@@ -61,7 +61,7 @@ describe('ErrorReducer', () => {
       }
       const action = ActionUtility.createAction(ErrorAction.REMOVE, httpErrorResponseModel.id)
 
-      const actualResult = ErrorReducer.reducer(initialState, action)
+      const actualResult = ErrorReducer(initialState, action)
       const expectedResult = {
         idOfKeyThatShouldNotBeRemoved: errorThatRemainsOnState,
       }
@@ -77,7 +77,7 @@ describe('ErrorReducer', () => {
       }
       const action = ActionUtility.createAction(ErrorAction.CLEAR_ALL)
 
-      const actualResult = ErrorReducer.reducer(initialState, action)
+      const actualResult = ErrorReducer(initialState, action)
       const expectedResult = {}
 
       expect(actualResult).toEqual(expectedResult)

@@ -1,4 +1,4 @@
-import RequestingReducer from './requesting-reducer'
+import RequestingReducer, { initialState as requestingReducerInitialState } from './requesting-reducer'
 
 describe('RequestingReducer', () => {
   const requestActionType = 'SomeAction.REQUEST_SOMETHING'
@@ -7,15 +7,16 @@ describe('RequestingReducer', () => {
   it('returns default state with invalid action type', () => {
     const action = { type: '' }
 
-    expect(RequestingReducer.reducer(undefined, action)).toEqual(RequestingReducer.initialState)
+    expect(RequestingReducer(undefined, action)).toEqual(requestingReducerInitialState)
   })
 
   describe('handle REQUEST_* action types', () => {
     it('should add the request action type as a key on the state and assign the value as true', () => {
       const action = { type: requestActionType }
 
-      const actualResult = RequestingReducer.reducer(RequestingReducer.initialState, action)
+      const actualResult = RequestingReducer(requestingReducerInitialState, action)
       const expectedResult = {
+        ...actualResult,
         [requestActionType]: true,
       }
 
@@ -27,8 +28,9 @@ describe('RequestingReducer', () => {
     it('should update the request action type key on the state and assign the value to false', () => {
       const action = { type: requestActionTypeFinished }
 
-      const actualResult = RequestingReducer.reducer(RequestingReducer.initialState, action)
+      const actualResult = RequestingReducer(requestingReducerInitialState, action)
       const expectedResult = {
+        ...actualResult,
         [requestActionType]: false,
       }
 
