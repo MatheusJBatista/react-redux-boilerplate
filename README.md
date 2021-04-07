@@ -1,3 +1,10 @@
+React: 17.0.2
+react-redux: 7.2.3
+react-router: 5.2.0
+redux: 4.0.5
+history: 4.10.1
+reselect: 4.0.0
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
